@@ -1,9 +1,11 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utn.h"
 
 
 static int getInt(int* pResultado);
+static int esNumero(char *pArray);
 
 
 int utn_getEntero(int* pEdad,int reintentos,char* msg,
@@ -43,10 +45,52 @@ int utn_getEntero(int* pEdad,int reintentos,char* msg,
 
 
 static int getInt(int* pResultado)
+{   /*
+    int aux;
+    int ret=-1;
+    if(scanf("%d",pResultado) == 1){
+        *pResultado=aux;
+        ret=0;
+        }
+    return ret;
+    */
+    char cadena[64];
+    int retorno;
+    scanf("%s",cadena);
+
+    // validar
+    if(esNumero(cadena)==0)
+    {
+        int auxiliar=atoi(cadena);
+        *pResultado=auxiliar;
+        retorno =0;
+    }
+    printf("%s",cadena);
+
+    return retorno;;
+
+}
+
+static int esNumero(char *pArray)
 {
-    if(scanf("%d",pResultado) == 1)
-        return 0;
-    return -1;
+    int retorno=0;
+    char aux;
+    int i=0;
+    aux=pArray[i];
+    while(aux!=0)
+    {
+        printf("\nchar: %d\n",aux);
+
+        if(  aux<48 || aux>58 )
+        {
+            retorno=-1;
+            break;
+        }
+        i++;
+        aux=pArray[i];
+    }
+
+    return retorno;
 }
 
 

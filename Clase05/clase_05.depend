@@ -11,3 +11,16 @@
 	<stdlib.h>
 	"utn.h"
 
+1536270557 source:/home/alumno/Escritorio/Programacion_1_2018/Clase05/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536270557 /home/alumno/Escritorio/Programacion_1_2018/Clase05/utn.h
+
+1536278429 source:/home/alumno/Escritorio/Programacion_1_2018/Clase05/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
