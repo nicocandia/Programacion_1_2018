@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
+#define CANTIDAD_EMPLEADOS 5
+#define DATO_INVALIDO -1
+#define false 0
+#define true 1
 
 
 static int getInt(int* pResultado);
@@ -81,7 +85,7 @@ static int esNumero(char *pArray)
     {
         printf("\nchar: %d\n",aux);
 
-        if(  aux<48 || aux>58 )
+        if( aux<48 || aux>58 )
         {
             retorno=-1;
             break;
@@ -91,6 +95,92 @@ static int esNumero(char *pArray)
     }
 
     return retorno;
+}
+
+int mostrarArray(int* pArray, int limite)
+{
+    int i;
+    for(i=0;i<limite;i++)
+    {
+        printf("\nIndex:%d - Value:%d - Add: %p",i,pArray[i],&pArray[i]);
+
+    }
+    return 0;
+}
+
+int calcularMaximoArray(int* pArray, int limite, int* pMaximo)
+{
+    int retorno=-1;
+    int i;
+
+    int maximo;
+    int flagPrimerMaximo = false;
+
+    if(pArray != NULL && limite > 0)
+    {
+
+        for(i=0;i<limite;i++)
+        {
+            if(pArray[i] != DATO_INVALIDO)
+            {
+                if(flagPrimerMaximo == false)
+                {
+                    maximo = pArray[i];
+                    flagPrimerMaximo = true;
+                }
+                else if(pArray[i] > maximo)
+                {
+                    maximo = pArray[i];
+                }
+            }
+        }
+
+        if(flagPrimerMaximo == 0)
+        {
+            retorno = -2;
+        }
+        else
+        {
+            retorno = 0;
+        }
+    }
+    return retorno;
+}
+
+int initArray(int* pArray, int limite, int valor)
+{
+    int retorno=-1;
+    int i;
+    if(pArray != NULL && limite > 0)
+    {
+        for(i=0;i<limite;i++)
+        {
+            pArray[i] = valor;
+        }
+        retorno = 0;
+    }
+    return retorno;
+}
+
+void ordenarArreglo(int *pArray,int limite,int flagMayorMenor)
+{
+    int flagnoTerminedeOrdenar=1;
+    int aux;
+
+    while(flagnoTerminedeOrdenar==1)
+    {
+        flagnoTerminedeOrdenar=0;
+        for(i=0;i<limite-1;i++)
+        {
+            if((flagMayorMenor==1 && pArray[i]>pArray[i+1]) || (flagMayorMenor==0 && pArray[i]<pArray[i+1]))
+            {
+                aux=pArray[i];
+                pArray[i]=pArray[i+1];
+                pArray[i+1]=aux;
+                flagnoTerminedeOrdenar=1;
+            }
+        }
+    }
 }
 
 

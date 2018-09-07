@@ -11,5 +11,10 @@
 int utn_getEntero(int* pEdad,int reintentos,char* msg,
                           char*msgErr,int min, int max);
 
+int calcularMaximoArray(int* pArray, int limite, int* pMaximo);
+
+int initArray(int* pArray, int limite, int valor);
+
+
 
 #endif // UTN_H_INCLUDED
