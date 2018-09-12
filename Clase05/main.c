@@ -31,7 +31,7 @@ int main()
         {
             printf("\n no es un numero\n");
         }
-    return 0;
+return 0;
 }
 
 
