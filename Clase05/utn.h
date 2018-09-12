@@ -13,7 +13,20 @@ int utn_getEntero(int* pEdad,int reintentos,char* msg,
 
 int calcularMaximoArray(int* pArray, int limite, int* pMaximo);
 
-int initArray(int* pArray, int limite, int valor);
+void initArray(int* pArray, int limite, int valor);
+
+int mostrarArray(int* pArray, int limite);
+
+int getInt(int* pResultado);
+
+void ordenarArreglo(int *pArray,int limite,int flagMayorMenor);
+
+int verificarArregloSoloLetras(char *pArreglo);
+
+int verificarCadenaAlfanumerica(char *pArreglo);
+
+int verificarNumeroTelefono(char *pArreglo);
+
 
 
 

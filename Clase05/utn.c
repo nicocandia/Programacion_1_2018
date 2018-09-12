@@ -1,4 +1,4 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
@@ -7,25 +7,23 @@
 #define false 0
 #define true 1
 
-
-static int getInt(int* pResultado);
 static int esNumero(char *pArray);
 
 
-int utn_getEntero(int* pEdad,int reintentos,char* msg,
+int utn_getEntero(int* pEntero,int reintentos,char* msg,
                           char*msgErr,int min, int max)
 {
     int retorno = -1;
-    int auxiliarEdad;
+    int auxiliarEntero;
 
     for(;reintentos > 0;reintentos--)
     {
         printf(msg);
-        if(getInt(&auxiliarEdad) == 0)
+        if(getInt(&auxiliarEntero) == 0)
         {
-            if(auxiliarEdad >= min && auxiliarEdad < max)
+            if(auxiliarEntero >= min && auxiliarEntero < max)
             {
-                *pEdad = auxiliarEdad;
+                *pEntero = auxiliarEntero;
                 retorno = 0;
                 break;
             }
@@ -37,18 +35,13 @@ int utn_getEntero(int* pEdad,int reintentos,char* msg,
         else
         {
             printf(msgErr);
-            __fpurge(stdin);
+            fflush(stdin);
         }
     }
     return retorno;
 }
 
-
-
-
-
-
-static int getInt(int* pResultado)
+int getInt(int* pResultado)
 {   /*
     int aux;
     int ret=-1;
@@ -59,7 +52,7 @@ static int getInt(int* pResultado)
     return ret;
     */
     char cadena[64];
-    int retorno;
+    int retorno=-1;
     scanf("%s",cadena);
 
     // validar
@@ -67,12 +60,9 @@ static int getInt(int* pResultado)
     {
         int auxiliar=atoi(cadena);
         *pResultado=auxiliar;
-        retorno =0;
+        retorno=0;
     }
-    printf("%s",cadena);
-
-    return retorno;;
-
+    return retorno;
 }
 
 static int esNumero(char *pArray)
@@ -81,11 +71,9 @@ static int esNumero(char *pArray)
     char aux;
     int i=0;
     aux=pArray[i];
-    while(aux!=0)
+    while(aux!='\0')
     {
-        printf("\nchar: %d\n",aux);
-
-        if( aux<48 || aux>58 )
+        if( aux<'0' || aux>'9' )
         {
             retorno=-1;
             break;
@@ -147,9 +135,8 @@ int calcularMaximoArray(int* pArray, int limite, int* pMaximo)
     return retorno;
 }
 
-int initArray(int* pArray, int limite, int valor)
+void initArray(int* pArray, int limite, int valor)
 {
-    int retorno=-1;
     int i;
     if(pArray != NULL && limite > 0)
     {
@@ -157,15 +144,14 @@ int initArray(int* pArray, int limite, int valor)
         {
             pArray[i] = valor;
         }
-        retorno = 0;
-    }
-    return retorno;
+}
 }
 
 void ordenarArreglo(int *pArray,int limite,int flagMayorMenor)
 {
     int flagnoTerminedeOrdenar=1;
     int aux;
+    int i;
 
     while(flagnoTerminedeOrdenar==1)
     {
@@ -183,4 +169,70 @@ void ordenarArreglo(int *pArray,int limite,int flagMayorMenor)
     }
 }
 
+int verificarArregloSoloLetras(char *pArreglo)
+{
+    int i=0;
+    int retorno=1;
+    char auxiliar=pArreglo[i];
+    while(auxiliar!= '\0')
+    {
+        if((auxiliar!=' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' ))
+            {
+                retorno=0;
+                break;
+            }
+            i++;
+            auxiliar=pArreglo[i];
+    }
+    return retorno;
+}
+
+int verificarCadenaAlfanumerica(char *pArreglo)
+{
+    int i=0;
+    int retorno=1;
+    char auxiliar=pArreglo[i];
+    while(auxiliar!= '\0')
+    {
+        if((auxiliar==' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
+            {
+                retorno=0;
+                break;
+            }
+            i++;
+            auxiliar=pArreglo[i];
+    }
+    return retorno;
+}
+
+int verificarNumeroTelefono(char *pArreglo)
+{
+    int i=0;
+    int retorno;
+    int contarGuion=0;;
+    char auxiliar=pArreglo[i];
+    while(auxiliar!= '\0')
+    {
+        if((auxiliar==' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
+            {
+                retorno=0;
+                break;
+            }
+        if(auxiliar=='-')
+            {
+                contarGuion++;
+            }
+        if(contarGuion==1)
+            {
+                retorno=1;
+            }
+        else
+            {
+                retorno=0;
+            }
+            i++;
+            auxiliar=pArreglo[i];
+    }
+    return retorno;
+}
 

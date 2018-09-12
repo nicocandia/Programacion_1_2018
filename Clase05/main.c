@@ -6,25 +6,31 @@
 #define false 0
 #define true 1
 
-
-int mostrarArray(int* pArray, int limite);
-
 int main()
-{
-    int edades[CANTIDAD_EMPLEADOS];
+{   char cadena[20];
+    printf("\n ingrese cadena:\n");
+    gets(cadena);
+
+   /* int edades[CANTIDAD_EMPLEADOS];
     int i;
 
     for(i=0;i < CANTIDAD_EMPLEADOS;i++)
     {
-        if(utn_getEntero(&edades[i],2,"\nEdad?","\nEdad fuera de rango",0,200)==-1)
+        if(utn_getEntero(&edades[i],2,"\nnumero?","\nEdad fuera de rango",0,200)==-1)
         {
             edades[i] = DATO_INVALIDO;
         }
     }
-
     mostrarArray(edades,CANTIDAD_EMPLEADOS);
-
-
+    */
+    if(verificarNumeroTelefono(cadena)==1)
+        {
+            printf("\n es un numero\n");
+        }
+    else
+        {
+            printf("\n no es un numero\n");
+        }
     return 0;
 }
 
