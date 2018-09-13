@@ -14,5 +14,7 @@ int utn_getFloat(  float* pFloat, char* msg,
 
 int isFloat(char* pBuffer);
 
+void insertion(int data[],int len);
+
 
 #endif // UTN_H_INCLUDED
