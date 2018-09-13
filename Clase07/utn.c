@@ -7,15 +7,28 @@ int isFloat(char* pBuffer)
     return 1;
 }
 
-static int getString()
+static int getString(char* pBuffer, int limite)
 {
     char bufferString [4096];
-    __fpurge(stdin);
-    fgets(bufferString,sizeof(bufferString),stdin);
-    if(bufferString[strlen(bufferString)-1]=='\n')
+    int retorno = -1;
+    if(pBuffer != NULL && limite > 0)
     {
-        buffer[strlen(buffer)-1]='\0';
+        __fpurge(stdin);
+        fgets(bufferString,sizeof(bufferString),stdin);
+        if(bufferString[strlen(bufferString)-1]=='\n')
+        {
+            bufferString[strlen(bufferString)-1]='\0';
+        }
+        if(strlen(bufferString) <= limite)
+        {
+            strncpy(pBuffer,bufferString,limite);
+            retorno = 0;
+        }
     }
+    return retorno;
+}
+
+
 }
 
 
