@@ -1,10 +1,38 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utn.h"
 
 int isFloat(char* pBuffer)
 {
-    return 1;
+    int retorno;
+    int i=0;
+    char auxiliar=pBuffer[i];
+    int contadorPunto=0;
+    while(auxiliar!='\0')
+        {
+            if(auxiliar==' ' || (auxiliar>='a' && auxiliar<='z') || (auxiliar>='A' && auxiliar<='Z'))
+                {
+                    retorno=-1;
+                    break;
+                }
+            if(auxiliar=='.')
+                {
+                    contadorPunto++;
+                }
+            if(contadorPunto==1)
+                {
+                    retorno=0;
+                }
+            else
+                {
+                    retorno=-1;
+                }
+                i++;
+                auxiliar=pBuffer[i];
+        }
+
+    return retorno;
 }
 
 static int getString(char* pBuffer, int limite)
@@ -13,7 +41,7 @@ static int getString(char* pBuffer, int limite)
     int retorno = -1;
     if(pBuffer != NULL && limite > 0)
     {
-        __fpurge(stdin);
+        fflush(stdin);
         fgets(bufferString,sizeof(bufferString),stdin);
         if(bufferString[strlen(bufferString)-1]=='\n')
         {
@@ -29,16 +57,16 @@ static int getString(char* pBuffer, int limite)
 }
 
 
-}
 
 
-static int getFloat(float* pBuffer)
+
+static int getFloat(float* pBuffer,int limite)
 {
-    char bufferString [5];
+    char bufferString [4096];
     int retorno = -1;
 
 
-    if(getString(bufferString) == 0 && isFloat(bufferString))
+    if(getString(bufferString,4096) == 0 && isFloat(bufferString)==0)
     {
         *pBuffer = atof(bufferString);
         retorno = 0;
@@ -62,7 +90,7 @@ int utn_getFloat(  float* pFloat, char* msg,
         {
             reintentos--;
             printf("%s",msg);
-            if( getFloat(&buffer) == 0 &&
+            if( getFloat(&buffer,max) == 0 &&
                 buffer >= min && buffer <= max)
             {
                 retorno = 0;

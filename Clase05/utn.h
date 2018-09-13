@@ -27,6 +27,8 @@ int verificarCadenaAlfanumerica(char *pArreglo);
 
 int verificarNumeroTelefono(char *pArreglo);
 
+int isFloat(char* pBuffer);
+
 
 
 

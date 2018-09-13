@@ -235,4 +235,34 @@ int verificarNumeroTelefono(char *pArreglo)
     }
     return retorno;
 }
+int isFloat(char* pBuffer)
+{
+    int retorno;
+    int i=0;
+    char auxiliar=pBuffer[i];
+    int contadorPunto=0;
+    while(auxiliar!='\0')
+        {
+            if(auxiliar==' ' || (auxiliar>='a' && auxiliar<='z') || (auxiliar>='A' && auxiliar<='Z'))
+                {
+                    retorno=-1;
+                    break;
+                }
+            if(auxiliar=='.')
+                {
+                    contadorPunto++;
+                }
+            if(contadorPunto==1)
+                {
+                    retorno=0;
+                }
+            else
+                {
+                    retorno=-1;
+                }
+                i++;
+                auxiliar=pBuffer[i];
+        }
 
+    return retorno;
+}

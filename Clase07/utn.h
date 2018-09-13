@@ -12,5 +12,7 @@ int utn_getFloat(  float* pFloat, char* msg,
                     char msgErr[],float min, float max,
                     int reintentos);
 
+int isFloat(char* pBuffer);
+
 
 #endif // UTN_H_INCLUDED

@@ -23,13 +23,13 @@ int main()
     }
     mostrarArray(edades,CANTIDAD_EMPLEADOS);
     */
-    if(verificarNumeroTelefono(cadena)==1)
+    if(isFloat(cadena)==0)
         {
-            printf("\n es un numero\n");
+            printf("\n es un numero flotante\n");
         }
     else
         {
-            printf("\n no es un numero\n");
+            printf("\n no es un numero flotante\n");
         }
 return 0;
 }
