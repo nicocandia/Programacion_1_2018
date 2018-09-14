@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1536885347 source:/home/alumno/Escritorio/Programacion_1_2018/Clase08/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
