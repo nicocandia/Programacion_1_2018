@@ -6,7 +6,7 @@
 int main()
 {
     int opcion;
-    int id;
+    int ID;
     Producto productos[CANTIDAD];
     inicializarEstado(productos,CANTIDAD);
     do{
@@ -29,16 +29,15 @@ int main()
 
         case 3:
 
-            if(utn_getInt(&id,"\n ingrese ID\n","\nerror\n",0,199,3)==0)
+            if(utn_getInt(&ID,"\n ingrese ID\n","\nerror\n",0,199,3)==0)
             {
 
             int i;
             for(i=0;i<CANTIDAD;i++)
                 {
-                    if(productos[i].ID==id && productos[i].estado==0)
+                    if(productos[i].ID==ID && productos[i].estado==0)
                         {
                             modificarProducto(productos,i);
-                            break;
                         }
                 }}
             break;
