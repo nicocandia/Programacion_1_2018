@@ -48,5 +48,7 @@ void producto_Imprimir(Producto*producto,int indice,int tamanio);
 
 int devolverIndice_Itemvacio(Producto*producto,int tamanio);
 
+int generarID(void);
+
 
 #endif // PRODUCTO_H_INCLUDED

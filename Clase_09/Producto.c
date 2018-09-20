@@ -399,3 +399,8 @@ int devolverIndice_Itemvacio(Producto*producto,int tamanio)
     }
     return retornoIndice;
 }
+int generarID(void)
+{
+    static int contID=-1;
+    return contID++;
+}
