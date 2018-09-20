@@ -6,6 +6,7 @@ typedef struct
     char descripcion[128];
     float precio;
     int estado;
+    int ID;
 }Producto;
 
 void inicializarEstado(Producto*arreglo,int tamanio);
@@ -48,7 +49,10 @@ void producto_Imprimir(Producto*producto,int indice,int tamanio);
 
 int devolverIndice_Itemvacio(Producto*producto,int tamanio);
 
-int generarID(void);
+int generarID();
 
+void menu();
+
+void modificarProducto(Producto*producto,int indice);
 
 #endif // PRODUCTO_H_INCLUDED

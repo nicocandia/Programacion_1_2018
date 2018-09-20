@@ -12,7 +12,7 @@ void inicializarEstado(Producto*arreglo,int tamanio)
     int i;
     for(i=0;i<tamanio;i++)
     {
-        arreglo[i].estado=0;
+        arreglo[i].estado=-1;
     }
 }
 
@@ -357,13 +357,14 @@ int dardeAlta(Producto*producto,int indice,int tamanio)
         {
             printf("\ningrese descripcion del producto\n");
             if(getString(descripcionAuxiliar,128)==0)
-            {   printf("\nDESCRIPCION: %s", descripcionAuxiliar);
-
-                if(utn_getFloat(&precioAuxiliar,"\ningrese precio del producto\n","\nerror,ingrese precio\n",0,1000,3)==0)
+            {
+                    if(utn_getFloat(&precioAuxiliar,"\ningrese precio del producto\n","\nerror,ingrese precio\n",0,1000,3)==0)
                 {
                     strncpy(producto[indice].nombre,nombreAuxiliar,32);
                     strncpy(producto[indice].descripcion,descripcionAuxiliar,128);
                     producto[indice].precio=precioAuxiliar;
+                    producto[indice].ID=generarID();
+                    producto[indice].estado=0;
                     dadodeAlta=0;
                 }
 
@@ -378,7 +379,7 @@ void producto_Imprimir(Producto*producto,int indice,int tamanio)
 {
     if(indice>=0 && indice<tamanio)
     {
-    printf("\n%s \n%s \n%f\n",producto[indice].nombre,producto[indice].descripcion,producto[indice].precio);
+    printf("\n NOMBRE:%s \n DESCRIPCION:%s \n PRECIO:%.2f\n ID: %d \nESTADO: %d",producto[indice].nombre,producto[indice].descripcion,producto[indice].precio,producto[indice].ID,producto[indice].estado);
     }
     else
     {
@@ -392,15 +393,37 @@ int devolverIndice_Itemvacio(Producto*producto,int tamanio)
     int retornoIndice=-1;
     for(i=0;i<tamanio;i++)
     {
-        if(producto[i].estado==0)
+        if(producto[i].estado==-1)
         {
             retornoIndice=i;
         }
     }
     return retornoIndice;
 }
-int generarID(void)
+int generarID()
 {
-    static int contID=-1;
+    static int contID=0;
     return contID++;
+}
+
+void menu()
+{
+    printf("\n 1- cargar producto\n");
+    printf("\n 2- imprimir lista de productos\n");
+    printf("\n 3- modificar producto\n ");
+    printf("\n opcion??? \n");
+}
+void modificarProducto(Producto*producto,int indice)
+{
+    char nombreAuxiliar[32];
+    float precioAuxiliar;
+    printf("\ncambiar nombre, nuevo nombre es:\n");
+    if(getString(nombreAuxiliar,32)==0)
+        {
+            if(utn_getFloat(&precioAuxiliar,"\ningrese precio nuevo\n","\nerror,ingrese precio correcto\n",0,3000,3)==0)
+                {
+                    strncpy(producto[indice].nombre,nombreAuxiliar,32);
+                    producto[indice].precio=precioAuxiliar;
+                }
+        }
 }
