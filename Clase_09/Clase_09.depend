@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1537405232 source:/home/alumno/Documentos/Mercedes Guerrero/Clase_09/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Producto.h"
+
+1537403284 /home/alumno/Documentos/Mercedes Guerrero/Clase_09/Producto.h
+
+1537405223 source:/home/alumno/Documentos/Mercedes Guerrero/Clase_09/Producto.c
+	<stdio.h>
+	<stdlib.h>
+	"Producto.h"
+	<string.h>
+

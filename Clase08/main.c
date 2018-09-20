@@ -2,9 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "Funciones.h"
-#define false 0
-#define true 1
-#define DATO_INVALIDO -1
+
 typedef struct
 {
     char nombre [70];
