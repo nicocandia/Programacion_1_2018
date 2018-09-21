@@ -222,7 +222,7 @@ int verificarArregloAlfanumerica(char *pArreglo)
     char auxiliar=pArreglo[i];
     while(auxiliar!= '\0')
     {
-        if((auxiliar==' ')&&(auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
+        if((auxiliar<'a' || auxiliar>'z') && (auxiliar<'A' || auxiliar>'Z' )&&(auxiliar<'0'|| auxiliar>'9'))
             {
                 retorno=0;
                 break;
@@ -402,7 +402,8 @@ int devolverIndice_Itemvacio(Producto*producto,int tamanio)
 }
 int generarID()
 {
-    static int contID=-1;
+    static int contID=0;
+
     return contID++;
 }
 
