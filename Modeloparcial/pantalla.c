@@ -4,7 +4,7 @@
 #include "pantalla.h"
 #define TRUE 1
 #define FALSE 0
-
+static int isLetras(char*pBuffer);
 static int getString(char* pBuffer, int limite)
 {
     char bufferString [4096];
@@ -81,14 +81,13 @@ int dardeAlta(Pantalla*pantalla,int indice,int tamanio)
 
         if(indice>=0 && indice<tamanio)
         {
-        printf("\ningrese nombre del producto\n");
-        if(getString(nombreAuxiliar,50)==0)
+        if(utn_getLetras(nombreAuxiliar,50,3,"\ningrese nombre\n","\nerror\n")==0)
         {
-            if(utn_getFloat(&precioAuxiliar,"\n ingrese precio\n","error",0,1000000,3)==0)
+            if(utn_getFloat(&precioAuxiliar,"\ningrese precio\n","error",0,1000000,3)==0)
             {
-            if(utn_getInt(&tipoAuxiliar,"\n ingrese 1 para LCD 0 para LED\n","\n error\n",0,1,3)==0)
+            if(utn_getInt(&tipoAuxiliar,"\ningrese 1 para LCD 0 para LED\n","\n error\n",0,1,3)==0)
             {
-                    printf("\n ingrese direccion \n");
+                    printf("\ningrese direccion \n");
                     if(getString(direccionAuxiliar,50)==0)
                     {
                     strncpy(pantalla[indice].nombre,nombreAuxiliar,50);
@@ -107,14 +106,17 @@ int dardeAlta(Pantalla*pantalla,int indice,int tamanio)
 return dadodeAlta;
 }
 
-void pantalla_Imprimir(Pantalla*pantalla,int indice,int tamanio)
+void pantalla_Imprimir(Pantalla*pantalla,int tamanio)
 {
-    if(indice>=0 && indice<tamanio)
-    {
-    printf("\n NOMBRE:%s \n DIRECCION:%s \n TIPO:%d\n ID: %d \nISEMPTY: %d",pantalla[indice].nombre,pantalla[indice].direccion,pantalla[indice].tipo,pantalla[indice].id,pantalla[indice].isEmpty);
+    int i;
+    for(i=0;i<tamanio;i++)
+        {
+            if(pantalla[i].isEmpty==FALSE)
+                {
+                    printf("\nNOMBRE:%s \nDIRECCION:%s \nTIPO:%d \nID:%d \nPRECIO:%.2f \nISEMPTY:%d \n",pantalla[i].nombre,pantalla[i].direccion,pantalla[i].tipo,pantalla[i].id,pantalla[i].precio,pantalla[i].isEmpty);
+                }
+        }
     }
-
-}
 
 int buscarLugarlibre(Pantalla*pantalla,int tamanio)
 {
@@ -261,38 +263,110 @@ int verificarArreglosoloFlotantes(char* pBuffer)
     return retorno;
 }
 
-int dardeBaja(Pantalla*pantalla,int indice,int tamanio)
+int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjError)
 {
-    int dadodeBaja=-1;
-    char nombreAuxiliar[50];
-    int tipoAuxiliar;
-    char direccionAuxiliar[50];
-    float precioAuxiliar;
-
-        if(indice>=0 && indice<tamanio)
-        {
-        printf("\ningrese nombre del producto\n");
-        if(getString(nombreAuxiliar,50)==0)
-        {
-            if(utn_getFloat(&precioAuxiliar,"\n ingrese precio\n","error",0,1000000,3)==0)
-            {
-            if(utn_getInt(&tipoAuxiliar,"\n ingrese 1 para LCD 0 para LED\n","\n error\n",0,1,3)==0)
-            {
-                    printf("\n ingrese direccion \n");
-                    if(getString(direccionAuxiliar,50)==0)
-                    {
-                    strncpy(pantalla[indice].nombre,nombreAuxiliar,50);
-                    strncpy(pantalla[indice].direccion,direccionAuxiliar,50);
-                    pantalla[indice].tipo=tipoAuxiliar;
-                    pantalla[indice].precio=precioAuxiliar,
-                    dadodeBaja=0;
-                    }
-
-
-                }
+    int retorno=-1;
+    char buffer[limite];
+    if(pBuffer!=NULL && limite >0 && reintentos >=0){
+        do{
+            reintentos--;
+            printf("\n%s",msj);
+            if(getString(buffer,limite)==0 && isLetras(buffer)==0){
+                strncpy(pBuffer,buffer,limite);
+                retorno=0;
+                break;
+            }else
+                printf("\n%s",msjError);
+        }while(reintentos>=0);
+    }
+    return retorno;
+}
+static int isLetras(char*pBuffer){
+    int retorno=-1;
+    int i=0;
+    if(pBuffer!=NULL){
+        do{
+            if((*(pBuffer+i)<65||*(pBuffer+i)>90) && (*(pBuffer+i)<97||*(pBuffer+i)>122)){
+                break;
             }
-            }
+            i++;
+        }while(i<strlen(pBuffer));
+        if(i==strlen(pBuffer)){
+            retorno=0;
         }
-        return dadodeBaja;
+    }
+    return retorno;
 }
 
+int modificarDatos_Pantalla(Pantalla*pantalla,int tamanio,int indice)
+ {
+     int retorno=-1;
+     int opcion;
+     char nombreAuxiliar[50];
+     char direccionAuxiliar[50];
+     float precioAuxiliar;
+     int tipoAuxiliar;
+
+     if (indice>=0 && indice<tamanio)
+        {
+            if(utn_getInt(&opcion,"\nIngrese:\n1 para modificar nombre\n2 para modificar direccion\n3 para modificar precio\n4 para modificar tipo\n","\Error, ingrese opcion valida\n",1,4,3)==0)
+                {
+                    switch(opcion)
+                    {
+                        case 1:
+                            if(utn_getLetras(nombreAuxiliar,50,3,"\nIngrese nuevo nombre\n","\nError, nombre no valido")==0)
+                                {
+                                    strncpy(pantalla[indice].nombre,nombreAuxiliar,50);
+                                    retorno=0;
+                                }
+                            break;
+
+                        case 2:
+                            if(utn_getLetras(direccionAuxiliar,50,3,"\nIngrese nueva direccion\n","\nError\n")==0)
+                                {
+                                    strncpy(pantalla[indice].direccion,direccionAuxiliar,50);
+                                    retorno=0;
+                                }
+                            break;
+
+                        case 3:
+                            if(utn_getFloat(&precioAuxiliar,"\nIngrese nuevo precio\n","\nError salario no valido\n",0,10000000,3)==0)
+                                {
+                                    pantalla[indice].precio=precioAuxiliar;
+                                    retorno=0;
+                                }
+                            break;
+
+                        case 4:
+                            if(utn_getInt(&tipoAuxiliar,"\nIngrese nuevo tipo\n","\nError sector no valido",0,1,3)==0)
+                                {
+                                    pantalla[indice].tipo=tipoAuxiliar;
+                                    retorno=0;
+                                }
+                            break;
+
+                    }
+                }
+        }
+
+     return retorno;
+ }
+
+ int dardeBaja_Pantalla(Pantalla*pantalla,int id,int tamanio)
+{
+    int i=0;
+    int retorno=-1;
+    if(pantalla!=NULL && id>=0)
+        {
+            for (i=0;i<tamanio;i++)
+                {
+                    if(pantalla[i].id==id)
+                        {
+                            pantalla[i].isEmpty=TRUE;
+                            retorno=0;
+                            break;
+                        }
+                }
+        }
+        return retorno;
+}

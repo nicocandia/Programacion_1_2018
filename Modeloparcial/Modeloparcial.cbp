@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Modeloparcial.c" />
+		<Option title="Modeloparcial" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -34,8 +34,13 @@
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="pantalla.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="pantalla.h" />
 		<Extensions>
 			<code_completion />
+			<envvars />
 			<debugger />
 		</Extensions>
 	</Project>

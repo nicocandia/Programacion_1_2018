@@ -1,9 +1,5 @@
 #ifndef PANTALLA_H_INCLUDED
 #define PANTALLA_H_INCLUDED
-#define TRUE 1
-#define FALSE 0
-#define LCD 1
-#define LED 0
 typedef struct
 {
     int id;
@@ -22,7 +18,7 @@ int getInt(int* pBuffer);
 
 int dardeAlta(Pantalla *pantalla,int indice,int tamanio);
 
-void pantalla_Imprimir(Pantalla*pantalla,int indice,int tamanio);
+void pantalla_Imprimir(Pantalla*pantalla,int tamanio);
 
 int buscarLugarlibre(Pantalla*pantalla,int tamanio);
 
@@ -41,9 +37,12 @@ int utn_getFloat(  float* pFloat, char* msg,
 
 int verificarArreglosoloFlotantes(char* pBuffer);
 
-int dardeBaja(Pantalla*pantalla,int indice,int tamanio);
+int utn_getLetras(char *pBuffer,int limite,int reintentos,char* msj,char*msjError);
 
+int modificarDatos_Pantalla(Pantalla*pantalla,int tamanio,int indice);
 
+int dardeBaja_Pantalla(Pantalla*pantalla,int id,int tamanio);
 
+int buscarPantallaporid(Pantalla*pantalla,int tamanio,int id);
 
 #endif // PANTALLA_H_INCLUDED
