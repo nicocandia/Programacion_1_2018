@@ -5,7 +5,7 @@
 #define TRUE 1
 #define FALSE 0
 static int isLetras(char*pBuffer);
-static int getString(char* pBuffer, int limite)
+int getString(char* pBuffer, int limite)
 {
     char bufferString [4096];
     int retorno = -1;
@@ -106,16 +106,19 @@ int dardeAlta(Pantalla*pantalla,int indice,int tamanio)
 return dadodeAlta;
 }
 
-void pantalla_Imprimir(Pantalla*pantalla,int tamanio)
+int pantalla_Imprimir(Pantalla*pantalla,int tamanio)
 {
     int i;
+    int retorno=-1;
     for(i=0;i<tamanio;i++)
         {
             if(pantalla[i].isEmpty==FALSE)
                 {
                     printf("\nNOMBRE:%s \nDIRECCION:%s \nTIPO:%d \nID:%d \nPRECIO:%.2f \nISEMPTY:%d \n",pantalla[i].nombre,pantalla[i].direccion,pantalla[i].tipo,pantalla[i].id,pantalla[i].precio,pantalla[i].isEmpty);
+                    retorno=0;
                 }
         }
+        return retorno;
     }
 
 int buscarLugarlibre(Pantalla*pantalla,int tamanio)
