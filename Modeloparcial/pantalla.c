@@ -325,7 +325,8 @@ int modificarDatos_Pantalla(Pantalla*pantalla,int tamanio,int indice)
                             break;
 
                         case 2:
-                            if(utn_getLetras(direccionAuxiliar,50,3,"\nIngrese nueva direccion\n","\nError\n")==0)
+                            printf("\n ingrese nueva direccion\n");
+                            if(getString(direccionAuxiliar,50)==0)
                                 {
                                     strncpy(pantalla[indice].direccion,direccionAuxiliar,50);
                                     retorno=0;
@@ -372,4 +373,10 @@ int modificarDatos_Pantalla(Pantalla*pantalla,int tamanio,int indice)
                 }
         }
         return retorno;
+}
+
+void pantalla_ImprimirPorIndice(Pantalla*pantalla,int indice)
+{
+    printf("\nNOMBRE:%s \nDIRECCION:%s \nTIPO:%d \nID:%d \nPRECIO:%.2f \nISEMPTY:%d \n",pantalla[indice].nombre,pantalla[indice].direccion,pantalla[indice].tipo,pantalla[indice].id,pantalla[indice].precio,pantalla[indice].isEmpty);
+
 }

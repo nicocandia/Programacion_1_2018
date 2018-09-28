@@ -47,4 +47,6 @@ int buscarPantallaporid(Pantalla*pantalla,int tamanio,int id);
 
 int getString(char* pBuffer, int limite);
 
+void pantalla_ImprimirPorIndice(Pantalla*pantalla,int indice);
+
 #endif // PANTALLA_H_INCLUDED

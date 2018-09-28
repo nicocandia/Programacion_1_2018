@@ -13,3 +13,28 @@
 	<string.h>
 	"pantalla.h"
 
+1538088283 source:/home/alumno/Escritorio/Programacion_1_2018/Modeloparcial/main.c
+	<stdio.h>
+	<stdlib.h>
+	"pantalla.h"
+	"Publicidad.h"
+	<string.h>
+
+1538086399 /home/alumno/Escritorio/Programacion_1_2018/Modeloparcial/pantalla.h
+
+1538087995 /home/alumno/Escritorio/Programacion_1_2018/Modeloparcial/Publicidad.h
+	"pantalla.h"
+
+1538086393 source:/home/alumno/Escritorio/Programacion_1_2018/Modeloparcial/pantalla.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pantalla.h"
+
+1538088045 source:/home/alumno/Escritorio/Programacion_1_2018/Modeloparcial/Publicidad.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"Publicidad.h"
+	"pantalla.h"
+

@@ -5,6 +5,8 @@
 #include "pantalla.h"
 #define TRUE 1
 #define FALSE 0
+#define LEN 100
+#define LEN_PUBLICIDAD 1000
 
 int dardeAlta_Publicidad(Publicidad*publicidad,int indice,int tamanio,int id)
 {
@@ -69,17 +71,85 @@ int buscarLugarlibre_Publicidad(Publicidad*publicidad,int tamanio)
     }
     return retornoIndice;
 }
-int buscariddePantalla_enPublicidad(int cuit,int tamanio,Publicidad*publicidad)
+void buscariddePantalla_enPublicidad(int cuit,int tamanio,Publicidad*publicidades,Pantalla *pantallas)
 {
     int i;
-    int retorno=-1;
+    int indice;
 
     for(i=0;i<tamanio;i++)
     {
-        if(publicidad[i].cuitCliente==cuit)
+        if(publicidades[i].cuitCliente==cuit)
         {
-            //Hacer una funcion que reciba un id de la pantalla e imprimi los datos de dicha pantalla
+            indice=buscarPantallaporid(pantallas,LEN,publicidades[i].idPantalla);//Hacer una funcion que reciba un id de la pantalla e imprimi los datos de dicha pantalla
+            pantalla_ImprimirPorIndice(pantallas,indice);
         }
     }
+
+}
+int modificar_DatosPublicidad(int cuit,int id,Publicidad*publicidades)
+{
+    int i;
+    int diasAuxiliar;
+    int retorno=-1;
+
+    for(i=0;i<LEN_PUBLICIDAD;i++)
+    {
+        if(publicidades[i].idPantalla==id && publicidades[i].cuitCliente==cuit)
+        {
+
+            if(utn_getInt(&diasAuxiliar,"\nIngrese dias a modificar\n","\nError dias no validos",0,999999999,3)==0)
+            {
+                publicidades[i].cantidadDias=diasAuxiliar;
+                retorno=0;
+                break;
+            }
+        }
+    }
+return retorno;
+}
+
+void listar_Publicidades(Publicidad*publicidades)
+{
+    int i;
+    for(i=0;i<LEN_PUBLICIDAD;i++)
+    {
+        if(publicidades[i].isEmpty==FALSE)
+        {
+        printf("\nCUIT CLIENTE:%d \nDIAS:%d \nTIPO de archivo:%s \nIDPANTALLA:%d \nIDPUBLICIDAD:%d \nISEMPTY:%d \n",publicidades[i].cuitCliente,publicidades[i].cantidadDias,publicidades[i].tipoArchivo,publicidades[i].idPantalla,publicidades[i].idPublicidad,publicidades[i].isEmpty);
+
+        }
+    }
+
+}
+
+int dardeBaja_Publicidad(Publicidad*publicidades,int cuit,int id)
+{
+    int i;
+    int retorno=-1;
+    for(i=0;i<LEN_PUBLICIDAD;i++)
+    {
+        if(publicidades[i].cuitCliente==cuit && publicidades[i].idPantalla==id)
+        {
+            publicidades[i].isEmpty=TRUE;
+            retorno=0;
+            break;
+        }
+    }
+    return retorno;
+}
+
+int eliminarPantalla_ytodasSuscontrataciones(Publicidad*publicidades,int id)
+{
+    int i;
+    int retorno=-1;
+    for(i=0;i<LEN_PUBLICIDAD;i++)
+    {
+        if(publicidades[i].idPantalla==id)
+        {
+            publicidades[i].isEmpty=TRUE;
+            retorno=0;
+        }
+    }
+    return retorno;
 }
 
