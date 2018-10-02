@@ -5,6 +5,8 @@
 #include <string.h>
 #define LEN_PANTALLAS 100
 #define LEN_PUBLICIDAD 1000
+#define TAMANIO_CUIT 13
+
 int main()
 {
     Pantalla pantallas[LEN_PANTALLAS];
@@ -15,7 +17,7 @@ int main()
     int opcion;
     int indice;
     int id;
-    int cuit;
+    char cuit[TAMANIO_CUIT];
 
     printf("\n <<<<<<BIENVENIDO>>>>>>\n");
     do
@@ -102,8 +104,9 @@ int main()
                         break;
 
                     case 5:
-                        if(utn_getInt(&cuit,"\nIngrese cuit del cliente\n","\nError",0,999999999,3)==0)
-                        {
+                        if(utn_getCuiloCuit(cuit,TAMANIO_CUIT,3,"\nIngrese cuit del cliente\n","\nError")==0)
+                        {   if(verificarExisteCuitPublicidad(publicidades,cuit)==0)
+                            {
                             buscariddePantalla_enPublicidad(cuit,LEN_PUBLICIDAD,publicidades,pantallas);
                             if(utn_getInt(&id,"\nIngrese id de la pantalla\n","error",0,99,3)==0)
                             {
@@ -114,12 +117,14 @@ int main()
                                 else
                                 {printf("\nNo se pudieron modificar los datos\n");}
                             }
+                            }else{printf("\nNo existe cuit registrado");}
                         }
                         break;
 
                     case 6:
-                    if(utn_getInt(&cuit,"\nIngrese cuit del cliente\n","\nError",0,999999999,3)==0)
-                        {
+                    if(utn_getCuiloCuit(cuit,TAMANIO_CUIT,3,"\nIngrese cuit del cliente\n","\nError")==0)
+                        {   if(verificarExisteCuitPublicidad(publicidades,cuit)==0)
+                            {
                             buscariddePantalla_enPublicidad(cuit,LEN_PUBLICIDAD,publicidades,pantallas);
                             if(utn_getInt(&id,"\nIngrese id de la pantalla\n","error",0,99,3)==0)
                             {
@@ -128,9 +133,10 @@ int main()
                                     printf("\nSe ha dado de baja la contratacion\n");
                                 }
                                 else
-                                {printf("\nNo se pudieron modificar los datos\n");}
+                                    {printf("\nNo se pudieron modificar los datos\n");}
                             }
                             else{printf("\nNo se pudo cargar id\n");}
+                        }else{printf("\nNo existe cuit registrado");}
                         }
                         else{printf("\nNo se pudo cargar cuit\n");}
                         break;
@@ -140,9 +146,13 @@ int main()
                         break;
 
                     case 7:
-                        if(utn_getInt(&cuit,"\nIngrese cuit\n","\nError cuit invalido\n",0,999999999,3)==0)
+                        if(utn_getCuiloCuit(cuit,TAMANIO_CUIT,3,"\nIngrese cuit del cliente\n","\nError")==0)
                         {
-
+                            if(verificarExisteCuitPublicidad(publicidades,cuit)==0)
+                                {
+                                    imprimirImporte_Facturacionapagar(publicidades,pantallas,cuit);
+                                }
+                            else{printf("\nNo existe cuit registrado");}
                         }
                     break;
 

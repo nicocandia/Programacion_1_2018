@@ -4,6 +4,8 @@
 #include "pantalla.h"
 #define TRUE 1
 #define FALSE 0
+#define LEN_PANTALLAS 100
+#define LEN_PUBLICIDAD 1000
 static int isLetras(char*pBuffer);
 int getString(char* pBuffer, int limite)
 {
@@ -379,4 +381,19 @@ void pantalla_ImprimirPorIndice(Pantalla*pantalla,int indice)
 {
     printf("\nNOMBRE:%s \nDIRECCION:%s \nTIPO:%d \nID:%d \nPRECIO:%.2f \nISEMPTY:%d \n",pantalla[indice].nombre,pantalla[indice].direccion,pantalla[indice].tipo,pantalla[indice].id,pantalla[indice].precio,pantalla[indice].isEmpty);
 
+}
+
+int devolverPrecio_Pantalla(Pantalla*pantallas,int id)
+{
+    int precio=-1;
+    int i;
+    for(i=0;i<LEN_PANTALLAS;i++)
+        {
+            if(pantallas[i].id==id)
+                {
+                    precio=pantallas[i].precio;
+                    break;
+                }
+        }
+        return precio;
 }

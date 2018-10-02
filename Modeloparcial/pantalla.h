@@ -49,4 +49,6 @@ int getString(char* pBuffer, int limite);
 
 void pantalla_ImprimirPorIndice(Pantalla*pantalla,int indice);
 
+int devolverPrecio_Pantalla(Pantalla*pantallas,int id);
+
 #endif // PANTALLA_H_INCLUDED
