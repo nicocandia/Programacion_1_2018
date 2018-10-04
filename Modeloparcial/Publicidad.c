@@ -18,13 +18,12 @@ int dardeAlta_Publicidad(Publicidad*publicidad,int indice,int tamanio,int id)
 
         if(indice>=0 && indice<tamanio)
         {
-        if(utn_getCuiloCuit(cuitAuxiliar,13,3,"\nIngrese cuit\n","\nerror\n")==0)
-        {
-            if(utn_getInt(&cantidadDiasauxiliar,"\ningrese dias\n","\nnerror\n",0,999999999,3)==0)
-            {
-
-                    printf("\ntipo de archivo\n");
-                    if(getString(tipoArchivoauxiliar,101)==0)
+        if(utn_getCuiloCuit(cuitAuxiliar,13,3,"\nIngrese cuit\n","\nerror\n")==0
+            &&
+            utn_getInt(&cantidadDiasauxiliar,"\ningrese dias\n","\nnerror\n",0,999999999,3)==0
+            &&
+            //printf("\ntipo de archivo\n");
+            getString(tipoArchivoauxiliar,101)==0)
                     {
                         strncpy(publicidad[indice].tipoArchivo,tipoArchivoauxiliar,101);
                         publicidad[indice].cantidadDias=cantidadDiasauxiliar;
@@ -37,7 +36,7 @@ int dardeAlta_Publicidad(Publicidad*publicidad,int indice,int tamanio,int id)
 
 
         }
-        }}
+
 
 return dadodeAlta;
 }
