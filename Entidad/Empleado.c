@@ -13,9 +13,16 @@ Empleado*empleado_new(void)
     return (Empleado*) malloc(sizeof(Empleado));
 }
 
-void empleado_delete(Empleado*this)
+int empleado_delete(Empleado*this)
 {
-    free(this);
+    int retorno=-1;
+    if(this!=NULL)
+    {
+        free(this);
+        retorno=0;
+    }
+ return retorno;
+ return retorno;
 }
 
 int empleado_setNombre(Empleado*this,char*nombre)
@@ -34,7 +41,7 @@ int empleado_getNombre(Empleado*this,char*nombre)
     int retorno=-1;
     if(this!=NULL && nombre!=NULL)
     {
-        strcpy(this->nombre,nombre);
+        strcpy(nombre,this->nombre);
         retorno=0;
     }
     return retorno;
@@ -129,4 +136,60 @@ Empleado* empleado_newParametros(char* nombre,char* apellido,float altura)
     }
 
     return pEmpleado;
+}
+
+int empleado_buscarLugarVacio(Empleado*array[],int len)
+{
+    int i;
+    int retorno=-1;
+
+    if(array!=NULL)
+    {
+        for(i=0;i<len;i++)
+        {
+            if(array[i]==NULL)
+            {
+                retorno=i;
+                break;
+            }
+        }
+    }
+    return retorno;
+}
+
+int empleado_InicializarArray(Empleado*array[],int len)
+{
+
+    int retorno=-1;
+    int i;
+
+    if (array!=NULL)
+    {
+        retorno=0;
+        for(i=0;i<len;i++)
+        {
+            array[i]=NULL;
+
+        }
+    }
+
+    return retorno;
+}
+
+int empleado_buscarporID(Empleado*array[],int len,int id)
+{
+    int retorno=-1;
+    int i;
+    Empleado*aux;
+
+    for(i=0;i<len;i++)
+    {
+        aux=array[i];
+        if(aux!=NULL && aux->idEmpleado==id)
+        {
+            retorno=i;
+            break;
+        }
+    }
+    return retorno;
 }

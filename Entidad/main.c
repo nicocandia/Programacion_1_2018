@@ -1,15 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "Empleado.h"
 #include "Service.H"
 int main()
 {
-    Empleado*listaEmpleados[1000];
-    Service*listaService[1000];
-    int qtyService=0;
-    int qtyEmpleados=0;
-    int i;
-    char auxiliar[50];
+    Empleado*listaEmpleados[100];
+    Empleado*auxiliar;
+    char auxNombre[100];
+
+    empleado_InicializarArray(listaEmpleados,100);
+    auxiliar=empleado_new();
+
+    int indexVacio;
+    indexVacio=empleado_buscarLugarVacio(listaEmpleados,100);
+
+    if(auxiliar!=NULL)
+    {
+            empleado_setNombre(auxiliar,"juan");
+            listaEmpleados[indexVacio]=auxiliar;
+    }
+
+    empleado_getNombre(auxiliar,auxNombre);
+    printf("\nNombre:%s\n",auxNombre);
+
 
     /*for(i=0;i<100;i++)
     {
@@ -33,7 +47,7 @@ int main()
         print_Service(listaService[i]);
     }*/
 
-    void ordenar(Empleado*listaEmpleados[],int limite)
+    /*void ordenar(Empleado*listaEmpleados[],int limite)
     {
         int flagSwap;
         int i;
@@ -54,7 +68,10 @@ int main()
             }
 
         }while(flagSwap);
-    }
+    }*/
+
+
+
 
 
     return 0;

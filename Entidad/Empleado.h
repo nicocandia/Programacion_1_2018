@@ -10,7 +10,7 @@ typedef struct
 
 Empleado* empleado_new();
 Empleado* empleado_newParametros(char* nombre,char* apellido,float altura);
-void empleado_delete(Empleado* this);
+int empleado_delete(Empleado* this);
 
 int empleado_setNombre(Empleado*this,char*nombre);
 int empleado_getNombre(Empleado*this,char*nombre);
@@ -26,5 +26,11 @@ int empleado_getAltura(Empleado*this,float*altura);
 
 int empleado_compareNombre(Empleado* thisA,Empleado*thisB);
 void print_Empleado(Empleado*this);
+
+int empleado_buscarLugarVacio(Empleado*array[],int len);
+
+int empleado_InicializarArray(Empleado*array[],int len);
+
+int empleado_buscarporID(Empleado*array[],int len,int id);
 
 #endif // EMPLEADO_H_INCLUDED
